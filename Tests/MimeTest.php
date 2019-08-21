@@ -36,5 +36,6 @@ class MimeTest extends TestCase
     public function testGeneral() {
         $m = Mime::sharedMime();
         $this->assertEquals("text/css", $m->getMimeForExtension("css"));
+        $this->assertEquals("application/pdf", $m->getMimeForExtension("pdf"));
     }
 }

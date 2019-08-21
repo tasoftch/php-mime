@@ -1,2 +1,2 @@
-# php-dependency-injection
-PHP Dependency Injection library in collaboration with service manager
+# PHP Mime Types Library
+Downloads and manages mime file types from apache.org

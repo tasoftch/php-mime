@@ -24,6 +24,8 @@
 namespace TASoft\Util;
 
 
+use Generator;
+
 class Mime
 {
     private $library;
@@ -49,9 +51,9 @@ class Mime
      * Yield all found mime suggestions for given mime
      *
      * @param string $extension
-     * @return \Generator
+     * @return Generator
      */
-    public function yieldMimeForExtension(string $extension): \Generator {
+    public function yieldMimeForExtension(string $extension): Generator {
         $f = $this->library["e2m"][$extension] ?? [];
         foreach($f as $_)
             yield $_;
@@ -67,5 +69,18 @@ class Mime
         foreach($this->yieldMimeForExtension($extension) as $mime)
             return $mime;
         return NULL;
+    }
+
+    /**
+     * Lists all matching mime types for an extension
+     *
+     * @param string $extension
+     * @return array|null
+     */
+    public function getMimesForExtension(string $extension): ?array {
+        $list = NULL;
+        foreach($this->yieldMimeForExtension($extension) as $mime)
+            $list[] = $mime;
+        return $mime;
     }
 }
