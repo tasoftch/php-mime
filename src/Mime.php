@@ -83,4 +83,41 @@ class Mime
             $list[] = $mime;
         return $mime;
     }
+
+    /**
+     * Yields all extensions for a given mime type.
+     *
+     * @param string $mime
+     * @return Generator
+     */
+    public function yieldExtensionForMime(string $mime) {
+        $f = $this->library["m2e"][$mime] ?? [];
+        foreach($f as $_)
+            yield $_;
+    }
+
+    /**
+     * Get extension for mime
+     *
+     * @param string $mime
+     * @return string|null
+     */
+    public function getExtensionForMime(string $mime): ?string {
+        foreach($this->yieldExtensionForMime($mime) as $ext)
+            return $ext;
+        return NULL;
+    }
+
+    /**
+     * List all extensions for a mime type
+     *
+     * @param string $mime
+     * @return array|null
+     */
+    public function getExtensionsForMime(string $mime): ?array {
+        $list = NULL;
+        foreach($this->yieldExtensionForMime($mime) as $mime)
+            $list[] = $mime;
+        return $mime;
+    }
 }
