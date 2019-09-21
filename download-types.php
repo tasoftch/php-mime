@@ -37,6 +37,21 @@ foreach (explode("\n", @file_get_contents(APACHE_MIME_TYPES_URL)) as $line) {
         }
     }
 }
+
+if(!isset($ext["php"])) {
+    foreach([
+                'text/php',
+                'text/x-php',
+                'application/php',
+                'application/x-php',
+                'application/x-httpd-php',
+                'application/x-httpd-php-source'
+            ] as $m) {
+        $ext["php"][] = $m;
+        $mimes[$m][] = 'php';
+    }
+}
+
 ksort($ext);
 ksort($mimes);
 $str = "<?php\nreturn['e2m'=>[";
