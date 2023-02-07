@@ -34,7 +34,8 @@ class Mime
      * Return the singleton instance of Mime
      * @return Mime
      */
-    public static function sharedMime() {
+    public static function sharedMime(): ?Mime
+	{
         static $mime = NULL;
         if(!$mime)
             $mime = new static();
@@ -81,7 +82,7 @@ class Mime
         $list = NULL;
         foreach($this->yieldMimeForExtension($extension) as $mime)
             $list[] = $mime;
-        return $mime;
+        return $list;
     }
 
     /**
@@ -116,8 +117,8 @@ class Mime
      */
     public function getExtensionsForMime(string $mime): ?array {
         $list = NULL;
-        foreach($this->yieldExtensionForMime($mime) as $mime)
-            $list[] = $mime;
-        return $mime;
+        foreach($this->yieldExtensionForMime($mime) as $ext)
+            $list[] = $ext;
+        return $list;
     }
 }
